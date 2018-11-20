@@ -44,3 +44,34 @@ To run one of the JOB queries:
 psql -U imdb -h localhost < job/1a.sql
 ```
 
+## Citation
+If you use the JOB dataset, please cite the original authors (no affiliation):
+```bibtex
+@article{JOB,
+  series = {VLDB '15},
+  title = {How {{Good Are Query Optimizers}}, {{Really}}?},
+  volume = {9},
+  issn = {2150-8097},
+  doi = {10.14778/2850583.2850594},
+  number = {3},
+  journal = {Proc. VLDB Endow.},
+  author = {Leis, Viktor and Gubichev, Andrey and Mirchev, Atanas and Boncz, Peter and Kemper, Alfons and Neumann, Thomas},
+  month = nov,
+  year = {2015},
+  pages = {204--215}
+}
+```
+
+If you use this VM or our prepared dataset, please cite our paper as well:
+```bibtex
+@inproceedings{rejoin,
+  address = {Houston, TX},
+  series = {aiDM '18},
+  title = {Deep {{Reinforcement Learning}} for {{Join Order Enumeration}}},
+  shorttitle = {{{ReJOIN}}},
+  booktitle = {First {{International Workshop}} on {{Exploiting Artificial Intelligence Techniques}} for {{Data Management}}},
+  author = {Marcus, Ryan and Papaemmanouil, Olga},
+  month = jun,
+  year = {2018}
+}
+```
