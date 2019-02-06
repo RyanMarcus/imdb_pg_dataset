@@ -52,6 +52,13 @@ tar xfv /media/data/pg_imdb.tar -C /media/data/
  
 echo "Going to load the database... this might take a few minutes..."
 pg_restore -v -d imdb -U imdb /media/data/pg_imdb/
+
+pg_ctl -D /media/data/pg_data stop
+
+cp /vagrant/postgres.service /etc/systemd/system/
+systemctl enable postgres
+systemctl start postgres
+
  
 EOF
 #reboot # get the latest kernel
