@@ -1,0 +1,32 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrant virtual environments for SQL Server 2017 on Ubuntu Linux
+
+Vagrant.configure(2) do |config|
+  config.vm.box_check_update = false
+  
+  config.persistent_storage.enabled = true
+  config.persistent_storage.location = "/home/#{`whoami`.chomp}/mssql_data.vdi"
+  config.persistent_storage.size = 50000
+  config.persistent_storage.mountname = 'mssql'
+  config.persistent_storage.filesystem = 'ext4'
+  config.persistent_storage.mountpoint = '/var/opt/mssql/'
+  config.persistent_storage.volgroupname = 'myvolgroup'
+  
+
+  config.vm.provider "virtualbox" do |vb, override|
+    vb.memory = "8096"
+    vb.cpus = 4
+    # Do not use official Ubuntu box, broken in many ways https://bugs.launchpad.net/cloud-images/+bug/1569237
+    override.vm.box = "bento/ubuntu-16.04"
+    override.vm.network "private_network", type: "dhcp"
+    override.vm.network :forwarded_port, host: 2433, guest: 1433  # SQLServer
+  end
+
+  scripts = [ "bootstrap.sh" ]
+  scripts.each { |script|
+    config.vm.provision :shell, privileged: false, :path => "./" << script
+  }
+
+end
