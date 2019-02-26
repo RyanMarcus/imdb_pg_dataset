@@ -1,7 +1,10 @@
-SELECT MIN(cn1.name) AS first_company, MIN(cn2.name) AS second_company, MIN(mi_idx1.info) AS first_rating, MIN(mi_idx2.info) AS second_rating, MIN(t1.title) AS first_movie, MIN(t2.title) AS second_movie 
-FROM aka_title at1, aka_title at2,company_name cn1, company_name cn2, info_type it1, info_type it2,  movie_companies mc1, movie_companies mc2, movie_info_idx mi_idx1, movie_info_idx mi_idx2, movie_link  ml, title t1, title t2 
-WHERE it1.info  = 'rating' AND it2.info  = 'rating' AND  mi_idx2.info  < '3.0' 
-AND at1.kind_id = t1.kind_id AND at2.kind_id = t2.kind_id AND t1.id = ml.movie_id AND t2.id = ml.linked_movie_id AND it1.id = mi_idx1.info_type_id AND t1.id = mi_idx1.movie_id 
-AND cn1.id = mc1.company_id AND t1.id = mc1.movie_id AND ml.movie_id = mi_idx1.movie_id AND ml.movie_id = mc1.movie_id 
-AND mi_idx1.movie_id = mc1.movie_id AND it2.id = mi_idx2.info_type_id AND t2.id = mi_idx2.movie_id AND cn2.id = mc2.company_id 
-AND t2.id = mc2.movie_id AND ml.linked_movie_id = mi_idx2.movie_id AND ml.linked_movie_id = mc2.movie_id AND mi_idx2.movie_id = mc2.movie_id;
+SELECT MIN(mi.info) AS movie_budget, MIN(mi_idx.info) AS movie_votes, MIN(kt.kind) AS movie_type, MIN(t.title) AS violent_liongate_movie 
+FROM cast_info ci, company_name cn, info_type it1, info_type it2, keyword k, movie_companies mc, movie_info mi, movie_info_idx mi_idx, movie_keyword mk, 
+title t, kind_type kt 
+WHERE ci.note  in ('(writer)', '(head writer)', '(written by)', '(story)', '(story editor)') AND 
+cn.name  like 'Lionsgate%' AND it1.info  = 'genres' AND it2.info  = 'votes' AND k.keyword  in ('murder', 'violence', 'blood', 'gore', 'death', 'female-nudity', 'hospital') 
+AND mc.note  like '%(Blu-ray)%' AND mi.info  in ('Horror', 'Thriller') AND t.production_year  > 2008 and (t.title like '%Freddy%' or t.title like '%Jason%' or t.title like 'Saw%') 
+AND t.id = mi.movie_id AND t.id = mi_idx.movie_id AND t.id = ci.movie_id AND t.id = mk.movie_id AND t.id = mc.movie_id AND ci.movie_id = mi.movie_id 
+AND ci.movie_id = mi_idx.movie_id AND ci.movie_id = mk.movie_id AND ci.movie_id = mc.movie_id AND mi.movie_id = mi_idx.movie_id AND mi.movie_id = mk.movie_id 
+AND mi.movie_id = mc.movie_id AND mi_idx.movie_id = mk.movie_id AND mi_idx.movie_id = mc.movie_id AND mk.movie_id = mc.movie_id 
+AND it1.id = mi.info_type_id AND it2.id = mi_idx.info_type_id AND k.id = mk.keyword_id AND cn.id = mc.company_id AND t.kind_id =kt.id;

@@ -1,5 +1,5 @@
 --- all sci-fi movies with case born in 1990's
-SELECT t.title, pi.info
+SELECT min(t.title), min(pi.info)
 FROM person_info as pi, info_type as it1, info_type as it2, name as n, cast_info as ci, title as t, movie_info as mi
 WHERE
 t.id = mi.movie_id

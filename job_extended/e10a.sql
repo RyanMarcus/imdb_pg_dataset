@@ -1,5 +1,5 @@
 --- top rated movies of indian actors
-select n.name, t.title
+select min(n.name), min(t.title)
 from info_type as it1,
 info_type as it2,
 movie_info_idx as mii,
