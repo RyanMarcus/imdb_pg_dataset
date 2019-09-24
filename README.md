@@ -2,9 +2,9 @@
 
 This repository contains a Vagrant machine that automatically pulls down and imports the IMDB dataset from that paper [How Good are Query Optimizers, Really?](http://www.vldb.org/pvldb/vol9/p204-leis.pdf). Note that, upon provisioning, the VM will download 1.2GB+ of data.
 
-It will create a VM running Arch Linux, upgrade it, install the latest version of Postgres, configure itself to use 8GB of RAM (4GB for the Postgres `shared_buffers`) and 2 CPU cores, create a 50GB disk image to hold the data, and, finally, download and load an archive. It could break at any moment.
+It will create a VM running Arch Linux, upgrade it, install the latest version of Postgres, configure itself to use 16GB of RAM (12GB for the Postgres `shared_buffers`) and 4 CPU cores, create a 100GB disk image to hold the data, and, finally, download and load an archive. It could break at any moment.
 
-Note: if you would just like to download a Postgres `pg_dump` of the IMDB dataset, you can get it here: [http://cs.brandeis.edu/~rcmarcus/pg_imdb.tar](http://cs.brandeis.edu/~rcmarcus/pg_imdb.tar) (1.2GB).
+Note: if you would just like to download a Postgres `pg_dump` of the IMDB dataset, you can get it here: [https://doi.org/10.7910/DVN/2QYZBT](https://doi.org/10.7910/DVN/2QYZBT)
 
 To use, first install the [persistent storage Vagrant plugin](https://github.com/kusnier/vagrant-persistent-storage):
 
@@ -17,7 +17,7 @@ Next, modify `vagrant/Vagrantfile` to set a path to where you would like the VDI
 ```ruby
 config.persistent_storage.enabled = true
 config.persistent_storage.location = "/PATH/TO/STORAGE/LOCATION.vdi"
-config.persistent_storage.size = 50000
+config.persistent_storage.size = 100000
 config.persistent_storage.mountname = 'pg'
 config.persistent_storage.filesystem = 'ext4'
 config.persistent_storage.mountpoint = '/media/data'
