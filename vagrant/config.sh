@@ -31,7 +31,7 @@ systemctl restart postgresql
 wget -O /media/data/imdb_pg11 --progress=dot:giga https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/2QYZBT/TGYUNU
 echo "Going to load the database... this might take a few minutes..."
 pg_restore -d imdb -U imdb --clean --if-exists -v /media/data/imdb_pg11
-
+psql -U imdb -d imdb -c "analyze;"
 
 #reboot # get the latest kernel
 
