@@ -3,9 +3,10 @@ sudo mkfs.ext4 -F /dev/sdb1
 sudo mount /dev/sdb1 /media/data
 
 pacman -Syu --noconfirm
-pacman -S postgresql llvm-libs parted wget --noconfirm
+pacman -S git clang llvm base-devel postgresql llvm-libs parted wget --noconfirm
  
- 
+
+
 # create the data partition
 sudo mkdir -p /media/data/pg_data
 sudo chgrp -R postgres /media
@@ -28,14 +29,24 @@ sed -i 's/127.0.0.1\/32/0.0.0.0\/0/g' /media/data/pg_data/data/pg_hba.conf
  
 echo "listen_addresses = '*'" >> /media/data/pg_data/data/postgresql.conf
 sed -i 's/shared_buffers = 128MB/shared_buffers = 12000MB/g' /media/data/pg_data/data/postgresql.conf
- 
+echo "shared_preload_libraries = 'pg_session_stats'" >> /media/data/pg_data/data/postgresql.conf
+echo "pg_session_stats.path = '/media/data/pg_data/pgss.sqlite3'" >> /media/data/pg_data/data/postgresql.conf
+
+systemctl stop postgresql
+
+git clone https://github.com/RyanMarcus/pg_session_stats.git
+cd pg_session_stats
+make USE_PGXS=1 install
+
 systemctl restart postgresql
- 
- 
+
 wget -O /media/data/imdb_pg11 --progress=dot:giga https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/2QYZBT/TGYUNU
 echo "Going to load the database... this might take a few minutes..."
 pg_restore -d imdb -U imdb --clean --if-exists -v /media/data/imdb_pg11
 psql -U imdb -d imdb -c "analyze;"
- 
+
+
+
+
 #reboot # get the latest kernel
 
