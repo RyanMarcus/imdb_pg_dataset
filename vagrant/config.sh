@@ -37,8 +37,15 @@ systemctl stop postgresql
 git clone https://github.com/RyanMarcus/pg_session_stats.git
 cd pg_session_stats
 make USE_PGXS=1 install
-
+cd
 systemctl restart postgresql
+
+git clone https://github.com/zilder/pg_dropcache.git
+cd pg_dropcache
+make USE_PGXS=1 install
+cd
+systemctl restart postgresql
+
 
 wget -O /media/data/imdb_pg11 --progress=dot:giga https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/2QYZBT/TGYUNU
 echo "Going to load the database... this might take a few minutes..."

@@ -1,3 +1,3 @@
-sudo systemctl restart postgresql
+psql -U imdb -c "create extension if not exists pg_dropcache; select pg_dropcache();"
 sudo bash -c "echo 1 > /proc/sys/vm/drop_caches"
 
