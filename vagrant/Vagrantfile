@@ -21,6 +21,7 @@ Vagrant.configure("2") do |config|
   config.persistent_storage.mountname = 'pg'
   config.persistent_storage.filesystem = 'ext4'
   config.persistent_storage.volgroupname = 'myvolgroup'
+  config.persistent_storage.diskdevice = '/dev/sdc'
   
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -59,8 +60,8 @@ Vagrant.configure("2") do |config|
   #
   config.vm.provider "virtualbox" do |vb|
     # Customize the amount of memory on the VM:
-    vb.memory = "16192"
-    vb.cpus = 4
+    vb.memory = "7500"
+    vb.cpus = 2
   end
   #
   # View the documentation for the provider you are using for more
