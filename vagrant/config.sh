@@ -6,7 +6,7 @@ sudo reflector --latest 20 --country US --sort rate --protocol https --save /etc
 sudo mkdir -p /media/data
 
 # get the device ID of the external (it is not consistent)
-DEV_ID=/dev/`lsblk -bl -o SIZE,NAME | tail -n +2 | sort -nr | grep 1$ | head -n 1 | cut -d' ' -f 2`
+DEV_ID=/dev/`lsblk -bl -o SIZE,NAME | tail -n +2 | sort -nr | head -n 1 | cut -d' ' -f 2`
 
 echo "Device ID of external storage: $DEV_ID"
 sudo mkfs.ext4 -F $DEV_ID
