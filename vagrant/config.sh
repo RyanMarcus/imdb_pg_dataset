@@ -12,6 +12,8 @@ echo "Device ID of external storage: $DEV_ID"
 sudo mkfs.ext4 -F $DEV_ID
 sudo mount $DEV_ID /media/data
 
+echo "$DEV_ID    /media/data    ext4    rw,relatime    0    0" >> /etc/fstab
+
 pacman -Syu --noconfirm
 pacman -S git clang llvm base-devel postgresql llvm-libs parted wget --noconfirm
 
