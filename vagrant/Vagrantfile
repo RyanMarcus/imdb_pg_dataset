@@ -14,9 +14,8 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "archlinux/archlinux"
 
-
   config.persistent_storage.enabled = true
-  config.persistent_storage.location = "/home/ryan/pg_data.vdi"
+  config.persistent_storage.location = "/flash1/ryan/pg_data.vdi"
   config.persistent_storage.size = 100000
   config.persistent_storage.mountname = 'pg'
   config.persistent_storage.filesystem = 'ext4'
