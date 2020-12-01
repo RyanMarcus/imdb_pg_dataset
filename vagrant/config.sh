@@ -45,8 +45,7 @@ sed -i 's/shared_buffers = 128MB/shared_buffers = 4GB/g' /media/data/pg_data/dat
 echo "shared_preload_libraries = 'pg_session_stats'" >> /media/data/pg_data/data/postgresql.conf
 echo "pg_session_stats.path = '/media/data/pg_data/pgss.sqlite3'" >> /media/data/pg_data/data/postgresql.conf
 
-systemctl stop postgresql
-
+#systemctl stop postgresql
 #git clone https://github.com/RyanMarcus/pg_session_stats.git
 #cd pg_session_stats
 #make USE_PGXS=1 install
