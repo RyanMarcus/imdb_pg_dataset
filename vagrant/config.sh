@@ -56,7 +56,8 @@ sed -i 's/shared_buffers = 128MB/shared_buffers = 4GB/g' /media/data/pg_data/dat
 #cd pg_dropcache
 #make USE_PGXS=1 install
 #cd
-#systemctl restart postgresql
+
+systemctl restart postgresql
 
 
 # get the archive locally, if we have it
