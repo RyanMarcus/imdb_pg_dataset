@@ -42,11 +42,10 @@ sed -i 's/127.0.0.1\/32/0.0.0.0\/0/g' /media/data/pg_data/data/pg_hba.conf
  
 echo "listen_addresses = '*'" >> /media/data/pg_data/data/postgresql.conf
 sed -i 's/shared_buffers = 128MB/shared_buffers = 4GB/g' /media/data/pg_data/data/postgresql.conf
-echo "shared_preload_libraries = 'pg_session_stats'" >> /media/data/pg_data/data/postgresql.conf
-echo "pg_session_stats.path = '/media/data/pg_data/pgss.sqlite3'" >> /media/data/pg_data/data/postgresql.conf
+#echo "shared_preload_libraries = 'pg_session_stats'" >> /media/data/pg_data/data/postgresql.conf
+#echo "pg_session_stats.path = '/media/data/pg_data/pgss.sqlite3'" >> /media/data/pg_data/data/postgresql.conf
 
-systemctl stop postgresql
-
+#systemctl stop postgresql
 #git clone https://github.com/RyanMarcus/pg_session_stats.git
 #cd pg_session_stats
 #make USE_PGXS=1 install
@@ -57,7 +56,8 @@ systemctl stop postgresql
 #cd pg_dropcache
 #make USE_PGXS=1 install
 #cd
-#systemctl restart postgresql
+
+systemctl restart postgresql
 
 
 # get the archive locally, if we have it
