@@ -1,0 +1,28 @@
+SELECT COUNT(*) FROM title as t,
+kind_type as kt,
+info_type as it1,
+movie_info as mi1,
+movie_info as mi2,
+info_type as it2,
+cast_info as ci,
+role_type as rt,
+name as n
+WHERE
+t.id = ci.movie_id
+AND t.id = mi1.movie_id
+AND t.id = mi2.movie_id
+AND mi1.movie_id = mi2.movie_id
+AND mi1.info_type_id = it1.id
+AND mi2.info_type_id = it2.id
+AND (it1.id in ('1'))
+AND (it2.id in ('3'))
+AND t.kind_id = kt.id
+AND ci.person_id = n.id
+AND ci.role_id = rt.id
+AND (mi1.info IN ('105','31','43','78','84','USA:13','USA:14','USA:16','USA:86','USA:92','USA:99'))
+AND (mi2.info IN ('Action','Animation','Crime','Documentary','Family','Horror','Reality-TV','Short','Sport'))
+AND (kt.kind in ('tv movie','tv series','video game','video movie'))
+AND (rt.role in ('actress','editor','miscellaneous crew'))
+AND (n.gender IN ('m') OR n.gender IS NULL)
+AND (t.production_year <= 2015)
+AND (t.production_year >= 1975)
